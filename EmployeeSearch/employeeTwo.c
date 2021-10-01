@@ -34,7 +34,7 @@ static int compareEmployeeName(const void *targetPtr, PtrToConstEmployee tableVa
 
 //Wrappers
 PtrToEmployee searchEmployeeTablebyIDNumber(PtrToConstEmployee ptr, int size, long number){
-    return searchEmployeeTable(ptr, size, &number compareEmployeeIDNumber);
+    return searchEmployeeTable(ptr, size, &number, compareEmployeeIDNumber);
 
 }
 
