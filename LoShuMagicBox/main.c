@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int checkLoShu(int LoShuBox[3][3]);
 int randomNumber();
@@ -6,6 +8,10 @@ int randomNumber();
 void main(){
 
     int LoShuBox[3][3] = {{2, 9, 4}, {7, 5, 3}, {6, 1, 8}};
+
+    time_t t;
+
+    srand((unsigned) time(&t));
 
     for(int i = 0; i<3; i++){
         for(int s = 0; s<3; s++){
@@ -20,12 +26,48 @@ void main(){
     printf("Common sum of this box: %d\n", result);
 
     int maybeLoShuBox[3][3];
+    int valuesInBox[9];
+    int pointer = 0;
+    int tf;
 
+    //create a box with no repeats
+    for(int i = 0; i<3; i++){
+        for(int s = 0; s<3; s++){
+            maybeLoShuBox[i][s] = rand() % 9 + 1;
+            valuesInBox[pointer] = maybeLoShuBox[i][s];
+            for(int u = 0; u < pointer; u++){
+                if(valuesInBox[u] == valuesInBox[pointer]){
+                    // printf("Repeat: %d, %d: %d", i, s, maybeLoShuBox[i][s]);
+                    maybeLoShuBox[i][s] = rand() % 9 +1;
+                    valuesInBox[pointer] = maybeLoShuBox[i][s];
+                    //incriments by 1 so to reach 0, has to be -1
+                    u = -1;
+                }
+            }
+            pointer++;
+
+        }
+    }
+
+    pointer = 0;
+
+    tf = checkLoShu(maybeLoShuBox);
+
+    printf("maybe loshu box\n");
+    for(int i = 0; i<3; i++){
+        for(int s = 0; s<3; s++){
+            printf("%d, ", maybeLoShuBox[i][s]);
+        }
+
+        printf("\n");
+    }
+
+    printf("Common sum of maybe: %d", tf);
 
 
 }
 
-int checkLoShu(int LoShuBox[3][3]){
+int checkLoShu(int Box[3][3]){
     //returns 0 if not a LoShuBox (sum can never be 0)
     //returns common sum if a LoShuBox
     int sum = 0;
@@ -36,13 +78,13 @@ int checkLoShu(int LoShuBox[3][3]){
 
     //get sum to compare against
     for (int s = 0; s<3; s++){
-        sum = sum + LoShuBox[0][s];
+        sum = sum + Box[0][s];
     }
 
     //get other sums to compare against sum
     for (int i = 1; i<3; i++){
         for (int s = 0; s<3; s++){
-            sum2 = sum2 + LoShuBox[i][s];
+            sum2 = sum2 + Box[i][s];
         }
 
         if(sum2 != sum){
@@ -55,7 +97,7 @@ int checkLoShu(int LoShuBox[3][3]){
 
     //check diagonals
     for (int d = 0; d<3; d++){
-        sum2 = sum2 + LoShuBox[d][d];
+        sum2 = sum2 + Box[d][d];
     }
 
     if(sum2 != sum){
@@ -66,7 +108,7 @@ int checkLoShu(int LoShuBox[3][3]){
 
     //check other diagonal
     for(int t = 0; t<3; t++){
-        sum2 = sum2 + LoShuBox[t][2-t];
+        sum2 = sum2 + Box[t][2-t];
     }
 
     if(sum2 != sum){
@@ -76,10 +118,5 @@ int checkLoShu(int LoShuBox[3][3]){
     sum2 = 0;
 
     return sum;
-
-}
-
-int randomNumber(){
-    
 
 }
