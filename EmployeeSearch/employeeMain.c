@@ -1,3 +1,5 @@
+//Compile script: gcc employeeOne.c employeeTable.c employeeMain.c
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,12 +28,25 @@ int main(){
 
     //Phone number NOT found example
     matchPtr = searchEmployeeByPhoneNumber(EmployeeTable, EmployeeTableEntries, "222-222-2222");
-    
+
     if(matchPtr != NULL){
         printf("Employee with phone number 222-222-2222 is in record %d\n", matchPtr - EmployeeTable);
     }else{
-        printf("Employee with phone number 222-222-2222 NOT found in record ):");
+        printf("Employee with phone number 222-222-2222 NOT found in record ):\n");
     }
 
+    matchPtr = searchEmployeeBySalary(EmployeeTable, EmployeeTableEntries, 8.23);
+    if(matchPtr != NULL){
+        printf("Employee with salary $8.23 found in record %d\n", matchPtr - EmployeeTable);
+    }else{
+        printf("Employee with salary of $8.23 NOT found in record ):\n");
+    }
+
+    matchPtr = searchEmployeeBySalary(EmployeeTable, EmployeeTableEntries, 1.23);
+    if(matchPtr != NULL){
+        printf("Employee with salary $1.23 found in record %d\n", matchPtr - EmployeeTable);
+    }else{
+        printf("Employee with salary of $1.23 NOT found in record ):\n");
+    }
 
 }
