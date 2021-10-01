@@ -35,6 +35,23 @@ int main(){
         printf("Employee with phone number 000-000-0000 not found\n");
     }
 
+    //Salary found
+    matchptr = searchEmployeebySalary(EmployeeTable, EmployeeTableEntries, 7.65);
+    if(matchptr != NULL){
+        printf("Employee with salary 7.65 found at record %d\n", matchptr - EmployeeTable);
+    }else{
+        printf("Employee with salary 7.65 not found\n");
+    }
+
+    //Salary NOT found
+    matchptr = searchEmployeebySalary(EmployeeTable, EmployeeTableEntries, 9.85);
+    if(matchptr != NULL){
+        printf("Employee with salary 9.85 found at record %d\n", matchptr - EmployeeTable);
+    }else{
+        printf("Employee with salary 9.85 not found\n");
+    }
+
+
     return EXIT_SUCCESS;
 }
 
