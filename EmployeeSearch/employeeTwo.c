@@ -15,8 +15,7 @@ static PtrToEmployee searchEmployeeTable(PtrToConstEmployee ptr, int tableSize, 
 }
 
 //functions that *functionPtr can point to
-//returns 0 if false
-
+//returns 0 if true
 static int compareEmployeePhoneNumer(const void *targetptr, PtrToConstEmployee tableValueptr){
     return strcmp((char *) targetptr, tableValueptr->phone);
 }
@@ -31,4 +30,22 @@ static int compareEmployeeIDNumber(const void *targetPtr, PtrToConstEmployee tab
 
 static int compareEmployeeName(const void *targetPtr, PtrToConstEmployee tableValueptr){
     return strcmp((char *) targetPtr, tableValueptr->name);
+}
+
+//Wrappers
+PtrToEmployee searchEmployeeTablebyIDNumber(PtrToConstEmployee ptr, int size, long number){
+    return searchEmployeeTable(ptr, size, &number compareEmployeeIDNumber);
+
+}
+
+PtrToEmployee searchEmployeeTablebyName(PtrToConstEmployee ptr, int size, char * name){
+    return searchEmployeeTable(ptr, size, name, compareEmployeeName);
+}
+
+PtrToEmployee searchEmployeeTablebyPhoneNumber(PtrToConstEmployee ptr, int size, char * phoneNumber){
+    return searchEmployeeTable(ptr, size, phoneNumber, compareEmployeePhoneNumer);
+}
+
+PtrToEmployee searchEmployeebySalary(PtrToConstEmployee ptr, int size, double salary){
+    return searchEmployeeTable(ptr, size, &salary, compareEmployeeSalary);
 }
