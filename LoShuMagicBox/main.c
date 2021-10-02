@@ -1,3 +1,4 @@
+//Compile script: gcc main.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -8,22 +9,44 @@ int randomNumber();
 void main(){
 
     int LoShuBox[3][3] = {{2, 9, 4}, {7, 5, 3}, {6, 1, 8}};
+    int notLoShuBox[3][3] = {{2, 9, 5}, {7, 4, 1}, {6, 3, 8}};
 
     time_t t;
 
     srand((unsigned) time(&t));
 
+    printf("Lo Shu Box: \n");
     for(int i = 0; i<3; i++){
+        printf("[ ");
         for(int s = 0; s<3; s++){
-            printf("%d, ", LoShuBox[i][s]);
+            printf("%d ", LoShuBox[i][s]);
         }
 
-        printf("\n");
+        printf("]\n");
     }
 
     int result = checkLoShu(LoShuBox);
 
-    printf("Common sum of this box: %d\n", result);
+    printf("Common sum of this box: %d\n\n", result);
+
+    //not a LoShuBox
+    printf("Not a Lo Shu Box: \n");
+    for(int i = 0; i<3; i++){
+        printf("[ ");
+        for(int s = 0; s<3; s++){
+            printf("%d ", notLoShuBox[i][s]);
+        }
+
+        printf("]\n");
+    }
+
+    result = checkLoShu(notLoShuBox);
+    if(result == 0){
+        printf("This is not a Lo Shu Box\n\n");
+    }else{
+        printf("The common sum of this Lo Shu Box is: %d\n\n", result);
+    }
+
 
     int maybeLoShuBox[3][3];
     int valuesInBox[9];
@@ -61,17 +84,18 @@ void main(){
     } while (tf == 0);
 
 
-    printf("maybe loshu box\n");
+    printf("Random Loshu Box: \n");
     for(int i = 0; i<3; i++){
+        printf("[ ");
         for(int s = 0; s<3; s++){
-            printf("%d, ", maybeLoShuBox[i][s]);
+            printf("%d ", maybeLoShuBox[i][s]);
         }
 
-        printf("\n");
+        printf("]\n");
     }
 
-    printf("Common sum of maybe: %d\n", tf);
-    printf("Times attempted: %d", counter);
+    printf("Common sum of the random Lo Shu box: %d\n", tf);
+    printf("Times attempted until Lo Shu box: %d", counter);
 
 
 }
