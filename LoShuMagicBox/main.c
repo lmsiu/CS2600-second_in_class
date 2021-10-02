@@ -4,7 +4,6 @@
 #include <time.h>
 
 int checkLoShu(int LoShuBox[3][3]);
-int randomNumber();
 
 void main(){
 
@@ -54,6 +53,7 @@ void main(){
     int tf;
     int counter = 0;
 
+    //Loop to find a Lo Shu Box
     do{
     
     //create a box with no repeats
@@ -82,6 +82,7 @@ void main(){
     counter++;
 
     } while (tf == 0);
+    //end loop
 
 
     printf("Random Loshu Box: \n");
