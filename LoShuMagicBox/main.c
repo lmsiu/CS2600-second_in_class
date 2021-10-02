@@ -29,7 +29,10 @@ void main(){
     int valuesInBox[9];
     int pointer = 0;
     int tf;
+    int counter = 0;
 
+    do{
+    
     //create a box with no repeats
     for(int i = 0; i<3; i++){
         for(int s = 0; s<3; s++){
@@ -53,6 +56,11 @@ void main(){
 
     tf = checkLoShu(maybeLoShuBox);
 
+    counter++;
+
+    } while (tf == 0);
+
+
     printf("maybe loshu box\n");
     for(int i = 0; i<3; i++){
         for(int s = 0; s<3; s++){
@@ -62,7 +70,8 @@ void main(){
         printf("\n");
     }
 
-    printf("Common sum of maybe: %d", tf);
+    printf("Common sum of maybe: %d\n", tf);
+    printf("Times attempted: %d", counter);
 
 
 }
@@ -81,7 +90,7 @@ int checkLoShu(int Box[3][3]){
         sum = sum + Box[0][s];
     }
 
-    //get other sums to compare against sum
+    //get other rows
     for (int i = 1; i<3; i++){
         for (int s = 0; s<3; s++){
             sum2 = sum2 + Box[i][s];
@@ -93,6 +102,19 @@ int checkLoShu(int Box[3][3]){
 
         sum2 = 0;
 
+    }
+
+    //check columns
+    for(int r = 0; r < 3; r++){
+        for(int c = 0; c < 3; c++){
+            sum2 = sum2 + Box[c][r];
+        }
+
+        if(sum2 != sum){
+            return 0;
+        }
+
+        sum2 = 0;
     }
 
     //check diagonals
